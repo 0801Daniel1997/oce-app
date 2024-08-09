@@ -7,6 +7,7 @@ const PlanProcedureItem = ({ procedure, users }) => {
     const handleAssignUserToProcedure = (e) => {
         setSelectedUsers(e);
         // TODO: Remove console.log and add missing logic
+        //ok
         console.log(e);
     };
 
