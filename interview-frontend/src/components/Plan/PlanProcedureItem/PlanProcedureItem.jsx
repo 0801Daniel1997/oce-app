@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactSelect from "react-select";
 
 const PlanProcedureItem = ({ procedure, users }) => {
-    const [selectedUsers, setSelectedUsers] = useState(null);
+   
+    const savedUsers = JSON.parse(localStorage.getItem('selectedUsers')) || [];
 
-    const handleAssignUserToProcedure = (e) => {
+    const [selectedUsers, setSelectedUsers] = useState(savedUsers);
+
+    useEffect(() => {
+      
+        localStorage.setItem('selectedUsers', JSON.stringify(selectedUsers));
+    }, [selectedUsers]);
+
+    const handleAssignUser = (e) => {
         setSelectedUsers(e);
-        // TODO: Remove console.log and add missing logic
-        //ok
-        console.log(e);
+       
     };
 
     return (
@@ -23,7 +29,7 @@ const PlanProcedureItem = ({ procedure, users }) => {
                 isMulti={true}
                 options={users}
                 value={selectedUsers}
-                onChange={(e) => handleAssignUserToProcedure(e)}
+                onChange={(e) => handleAssignUser(e)}
             />
         </div>
     );
