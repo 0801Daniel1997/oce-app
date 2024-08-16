@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RL.Data;
 
@@ -10,9 +11,10 @@ using RL.Data;
 namespace RL.Data.Migrations
 {
     [DbContext(typeof(RLContext))]
-    partial class RLContextModelSnapshot : ModelSnapshot
+    [Migration("20240813120444_InitialCreate1")]
+    partial class InitialCreate1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -791,6 +793,12 @@ namespace RL.Data.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("PlanProcedurePlanId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("PlanProcedureProcedureId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("TEXT");
 
@@ -798,35 +806,9 @@ namespace RL.Data.Migrations
 
                     b.HasIndex("ProcedureId");
 
+                    b.HasIndex("PlanProcedurePlanId", "PlanProcedureProcedureId");
+
                     b.ToTable("ProcedureUsers");
-                });
-
-            modelBuilder.Entity("RL.Data.DataModels.SelectedList", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ProcedureId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PlanId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsChecked")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId", "ProcedureId", "PlanId");
-
-                    b.ToTable("SelectedList");
                 });
 
             modelBuilder.Entity("RL.Data.DataModels.User", b =>
@@ -905,11 +887,20 @@ namespace RL.Data.Migrations
                         .HasForeignKey("ProcedureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("RL.Data.DataModels.PlanProcedure", null)
+                        .WithMany("ProcedureUsers")
+                        .HasForeignKey("PlanProcedurePlanId", "PlanProcedureProcedureId");
                 });
 
             modelBuilder.Entity("RL.Data.DataModels.Plan", b =>
                 {
                     b.Navigation("PlanProcedures");
+                });
+
+            modelBuilder.Entity("RL.Data.DataModels.PlanProcedure", b =>
+                {
+                    b.Navigation("ProcedureUsers");
                 });
 
             modelBuilder.Entity("RL.Data.DataModels.Procedure", b =>

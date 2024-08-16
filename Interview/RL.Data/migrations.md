@@ -19,7 +19,7 @@ oec-interview
 
 Command allows you to create a new migration based on the changes made to the data model
 ```shell
-dotnet ef migrations add InitialCreate --startup-project ../RL.Backend/RL.Backend.csproj --project ..\RL.Data\RL.Data.csproj --context RLContext --output-dir Migrations
+dotnet ef migrations add SelectedList --startup-project ../RL.Backend/RL.Backend.csproj --project ..\RL.Data\RL.Data.csproj --context RLContext --output-dir Migrations
 ```
 
 ## Apply Migration

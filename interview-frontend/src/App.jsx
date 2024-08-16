@@ -7,6 +7,7 @@ const App = () => {
 
     const start = async () => {
         var plan = await startPlan();
+        console.log("this is plan",plan)
         navigate(`/plan/${plan.planId}`);
     };
 

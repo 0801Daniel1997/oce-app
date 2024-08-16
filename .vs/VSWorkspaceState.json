@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Interview",
+    "\\interview-frontend\\src",
+    "\\interview-frontend\\src\\api",
+    "\\interview-frontend\\src\\components",
+    "\\interview-frontend\\src\\components\\Plan",
+    "\\interview-frontend\\src\\components\\Plan\\PlanProcedureItem",
+    "\\Interview\\RL.Backend",
+    "\\Interview\\RL.Backend\\Controllers",
+    "\\Interview\\RL.Backend\\Controllers\\Commands",
+    "\\Interview\\RL.Backend\\Controllers\\Commands\\Handlers"
+  ],
+  "SelectedNode": "\\Interview\\RL.Backend",
+  "PreviewInSolutionExplorer": false
+}
