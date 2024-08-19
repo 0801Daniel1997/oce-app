@@ -28,10 +28,10 @@ public class SelectedListController : ControllerBase
 
     [HttpGet]
     [EnableQuery]
-    public IEnumerable<SelectedList> Get(int planId, int procedureId)
+    public IEnumerable<SelectedList> Get(int planId)
     {
         return _context.SelectedList
-                       .Where(sl => sl.PlanId == planId && sl.ProcedureId == procedureId)
+                       .Where(sl => sl.PlanId == planId)
                        .ToList();
     }
     [HttpPost("ModifySelectedList")]

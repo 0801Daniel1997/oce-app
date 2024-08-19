@@ -3,7 +3,6 @@ import ReactSelect from "react-select";
 
 const PlanProcedureItem = ({ plan, procedure, users }) => {
     const [selectedUsers, setSelectedUsers] = useState([]);
-
     const api_url = "https://localhost:5001";
     const url1 = `${api_url}/ProcedureUser/AddUserToProcedure`;
     const url2 = `${api_url}/SelectedList?planId=${plan}`;
@@ -14,10 +13,13 @@ const PlanProcedureItem = ({ plan, procedure, users }) => {
     }, [plan, procedure]);
 
     const handleSubmit = async () => {
+        const planId = plan;
+        const procedureId = procedure.procedureId;
         const userIds = selectedUsers.map(user => user.value);
+
         const command = {
-            planId: plan,
-            procedureId: procedure.procedureId,
+            planId: planId,
+            procedureId: procedureId,
             userIds: userIds
         };
 
@@ -33,6 +35,7 @@ const PlanProcedureItem = ({ plan, procedure, users }) => {
 
             if (!response.ok) {
                 const error = await response.text();
+
                 throw new Error(`Failed to create plan: ${error}`);
             }
 
@@ -81,6 +84,7 @@ const PlanProcedureItem = ({ plan, procedure, users }) => {
                 throw new Error(`Failed to modify selected list: ${error}`);
             }
 
+
             getUserByPlan();
         } catch (error) {
             console.error("Error modifying selected list:", error);
@@ -103,9 +107,13 @@ const PlanProcedureItem = ({ plan, procedure, users }) => {
             }
 
             const data = await response.json();
+
+
+
             const filteredData = data.filter(item =>
                 item.procedureId === procedure.procedureId && item.isChecked
             );
+
 
             const mappedUsers = users.filter(user =>
                 filteredData.some(selected => selected.userId === user.value)
@@ -135,4 +143,4 @@ const PlanProcedureItem = ({ plan, procedure, users }) => {
     );
 };
 
-export default PlanProcedureItem;
+export default PlanProcedureItem; 
